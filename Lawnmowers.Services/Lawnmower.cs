@@ -8,5 +8,12 @@ namespace Lawnmowers.Services
 {
     public class Lawnmower
     {
+        public LawnDimensions LawnDimensionsReference { get; set; }
+
+        public LocationCoordinates Position { get; set; }
+
+        public char Orientation { get; set; }
+
+        public string Instructions { get; set; }
     }
 }

@@ -62,6 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LocationCoordinatesTests.cs" />
     <Compile Include="LawnDimensionsTests.cs" />
     <Compile Include="LawnmowingInstructionsInputParserTests.cs" />
     <Compile Include="LawnmowingInstructionsInputValidatorTests.cs" />

@@ -15,7 +15,7 @@ namespace Lawnmowers.Services.Tests
         public void Test_that_we_can_create_lawn_dimensions_with_valid_values()
         {
             // act
-            var lawnDimensions = new LawnDimensions(2, 4);
+            var lawnDimensions = new LawnDimensions(new LocationCoordinates(2, 4));
 
             // assert
             Assert.That(lawnDimensions, Is.Not.Null);
@@ -33,7 +33,7 @@ namespace Lawnmowers.Services.Tests
 
         private void RaiseExceptionWhenCreatingLawnDimentions(int x, int y)
         {
-            var lawnDimensions = new LawnDimensions(x, y);
+            var lawnDimensions = new LawnDimensions(new LocationCoordinates(x, y));
         }
     }
 }

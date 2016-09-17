@@ -8,30 +8,28 @@ namespace Lawnmowers.Services
 {
     public class ILawnDimensions
     {
-        int LengthOfAxisX { get; set; }
-        int LengthOfAxisY { get; set; }
+        int LengthOfAxisX { get; }
+        int LengthOfAxisY { get; }
     }
 
     public class LawnDimensions : ILawnDimensions
     {
-        int _lengthOfAxisX = 1;
+        private LocationCoordinates _topRightCornerLocation;
+
         public int LengthOfAxisX
         {
             get
             {
-                return _lengthOfAxisX;
+                return _topRightCornerLocation.LocationOnAxisX;
             }
-            private set {}
         }
 
-        int _lengthOfAxisY = 1;
         public int LengthOfAxisY
         {
             get
             {
-                return _lengthOfAxisY;
+                return _topRightCornerLocation.LocationOnAxisY;
             }
-            private set { }
         }
 
         private LawnDimensions()
@@ -41,21 +39,20 @@ namespace Lawnmowers.Services
             // through an overloaded public constructor instead
         }
 
-        public LawnDimensions(int lengthOfAxisX, int lengthOfAxisY)
+        public LawnDimensions(LocationCoordinates topRightCornerLocation)
         {
-            SetDimensions(lengthOfAxisX, lengthOfAxisY);
+            SetDimensions(topRightCornerLocation);
         }
 
-        private void SetDimensions(int lengthOfAxisX, int lengthOfAxisY)
+        private void SetDimensions(LocationCoordinates topRightCornerLocation)
         {
-            if (lengthOfAxisX <= 0)
+            if (topRightCornerLocation.LocationOnAxisX <= 0)
                 throw new ArgumentException("The value for the axis X must be equal or greater than 1");
 
-            if (lengthOfAxisY <= 0)
+            if (topRightCornerLocation.LocationOnAxisY <= 0)
                 throw new ArgumentException("The value for the axis Y must be equal or greater than 1");
 
-            _lengthOfAxisX = lengthOfAxisX;
-            _lengthOfAxisY = lengthOfAxisY;
+            _topRightCornerLocation = topRightCornerLocation;
         }
     }
 }

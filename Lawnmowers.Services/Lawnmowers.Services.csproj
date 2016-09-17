@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocationCoordinates.cs" />
     <Compile Include="LawnDimensions.cs" />
     <Compile Include="Lawnmower.cs" />
     <Compile Include="LawnmowingInstructionsInputParser.cs" />
