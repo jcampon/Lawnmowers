@@ -55,6 +55,9 @@ namespace Lawnmowers.Services.Tests
         [TestCase("5 aaa\n1 2 N\nLMLMLMLMM", false)]
         [TestCase("aaa 5\n1 2 N\nLMLMLMLMM", false)]
         [TestCase("This is line #1\n1 2 N\nLMLMLMLMM", false)]
+        [TestCase("5 0\n1 2 N\nLMLMLMLMM", false)]
+        [TestCase("0 5\n1 2 N\nLMLMLMLMM", false)]
+        [TestCase("-7 5\n1 2 N\nLMLMLMLMM", false)]
         public void Test_that_first_line_of_instructions_input_has_valid_upper_right_coordinates(string instructionsInput, bool expectedResult)
         {
             // Act
@@ -68,6 +71,7 @@ namespace Lawnmowers.Services.Tests
         [TestCase("5 5\nAAAAA AAAA AAAA AAAA\nLMLMLMLMM", false)]
         [TestCase("5 5\n1 2 N\nLMLMLMLMM\n3 4 S\nLMLMLMLMM", true)]
         [TestCase("5 5\n1 2 N\nLMLMLMLMM\nBBBB BBBB BBBBB\nLMLMLMLMM", false)]
+        [TestCase("5 5\n-1 2 N\nLMLMLMLMM\n3 4 S\nLMLMLMLMM", false)]
         public void Test_that_the_lines_about_mower_positions_are_correct(string instructionsInput, bool expectedResult)
         {
             // Act

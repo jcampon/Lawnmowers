@@ -14,6 +14,9 @@ namespace Lawnmowers.Services
 
     public class LawnmowingInstructionsInputValidator : ILawnmowingInstructionsInputValidator
     {
+        private const int MINIMUM_LENGTH_OF_LAWN = 1;
+        private const int MINIMUM_COORDINATE_VALUE = 0;
+
         public bool Validate(string instructions)
         {
             if (!ValidateThatInstructionsAreNotNullOrEmpty(instructions))
@@ -61,20 +64,23 @@ namespace Lawnmowers.Services
             if (firstLineComponents.Count() != 2)
                 return false;
 
-            if (!CheckValidNumberValidationFor(firstLineComponents[0]))
+            if (!CheckValidNumberValidationFor(firstLineComponents[0], MINIMUM_LENGTH_OF_LAWN))
                 return false;
 
-            if (!CheckValidNumberValidationFor(firstLineComponents[1]))
+            if (!CheckValidNumberValidationFor(firstLineComponents[1], MINIMUM_LENGTH_OF_LAWN))
                 return false;
 
             return true;
         }
 
-        private bool CheckValidNumberValidationFor(string value)
+        private bool CheckValidNumberValidationFor(string value, int lowestValidValue)
         {
-            int parsedIntValue = 0;
+            var parsedIntValue = 0;
 
-            return int.TryParse(value.ToString(), out parsedIntValue);
+            if (!int.TryParse(value.ToString(), out parsedIntValue))
+                return false;
+
+            return parsedIntValue >= lowestValidValue;
         }
 
         private bool ValidateThatTheLinesAboutMowerPositionsAreCorrect(string instructions)
@@ -103,10 +109,10 @@ namespace Lawnmowers.Services
             if (lineComponents.Count() != 3)
                 return false;
 
-            if (!CheckValidNumberValidationFor(lineComponents[0]))
+            if (!CheckValidNumberValidationFor(lineComponents[0], MINIMUM_COORDINATE_VALUE))
                 return false;
 
-            if (!CheckValidNumberValidationFor(lineComponents[1]))
+            if (!CheckValidNumberValidationFor(lineComponents[1], MINIMUM_COORDINATE_VALUE))
                 return false;
 
             if (!CheckCoordinatesLetterValidationFor(lineComponents[2]))
