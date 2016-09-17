@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LawnDimensions.cs" />
+    <Compile Include="Lawnmower.cs" />
     <Compile Include="LawnmowingInstructionsInputParser.cs" />
     <Compile Include="LawnmowingInstructionsInputValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

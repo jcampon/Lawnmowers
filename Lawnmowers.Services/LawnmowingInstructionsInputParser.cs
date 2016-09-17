@@ -10,6 +10,8 @@ namespace Lawnmowers.Services
     public interface ILawnmowingInstructionsInputParser
     {
         LawnDimensions GetLawnDimensionsFrom(string instructions);
+
+        List<Lawnmower> GetListOfLawnMowersFrom(string instructions);
     }
 
     public class LawnmowingInstructionsInputParser : ILawnmowingInstructionsInputParser
@@ -24,5 +26,17 @@ namespace Lawnmowers.Services
             return new LawnDimensions(dimensionOfAxisX, dimensionOfAxisY);
         }
 
+        public List<Lawnmower> GetListOfLawnMowersFrom(string instructions)
+        {
+            var listOfLawnmowers = new List<Lawnmower>();
+
+            var linesOfInput = instructions.Split('\n');
+            for (var i = 1; i <= linesOfInput.Count() - 1; i += 2)
+            {
+                listOfLawnmowers.Add(new Lawnmower());
+            }
+
+            return listOfLawnmowers;
+        }
     }
 }
