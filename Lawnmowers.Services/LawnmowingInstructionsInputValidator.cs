@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Lawnmowers.Services
 {
+    public interface ILawnmowingInstructionsInputValidator
+    {
+        bool Validate(string instructions);
+    }
+
     public class LawnmowingInstructionsInputValidator : ILawnmowingInstructionsInputValidator
     {
         public bool Validate(string instructions)
