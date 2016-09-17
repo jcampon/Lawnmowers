@@ -14,25 +14,8 @@ namespace Lawnmowers.Services
 
     public class LocationCoordinates : ILocationCoordinates
     {
-        int _locationOnAxisX = 0;
-        public int LocationOnAxisX
-        {
-            get
-            {
-                return _locationOnAxisX;
-            }
-            private set {}
-        }
-
-        int _locationOnAxisY = 0;
-        public int LocationOnAxisY
-        {
-            get
-            {
-                return _locationOnAxisY;
-            }
-            private set { }
-        }
+        public int LocationOnAxisX { get; set; }
+        public int LocationOnAxisY { get; set; }
 
         private LocationCoordinates()
         {
@@ -54,8 +37,8 @@ namespace Lawnmowers.Services
             if (axisY < 0)
                 throw new ArgumentException("The value for the axis Y must be equal or greater than 0");
 
-            _locationOnAxisX = axisX;
-            _locationOnAxisY = axisY;
+            LocationOnAxisX = axisX;
+            LocationOnAxisY = axisY;
         }
     }
 }
