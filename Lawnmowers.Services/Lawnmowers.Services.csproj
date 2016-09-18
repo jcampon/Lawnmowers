@@ -40,13 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LawnmowingInstructionsInputValidator.cs" />
     <Compile Include="LawnmowingOperationsService.cs" />
     <Compile Include="LocationCoordinates.cs" />
     <Compile Include="LawnDimensions.cs" />
     <Compile Include="Lawnmower.cs" />
     <Compile Include="LawnmowingInstructionsInputParser.cs" />
-    <Compile Include="LawnmowingInstructionsInputValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationStrategies\BaseValidatorConditionStrategy.cs" />
+    <Compile Include="ValidationStrategies\IValidatorConditionStrategy.cs" />
+    <Compile Include="ValidationStrategies\ValidateThatFirstLineHasValidUpperRightCoordinatesStrategy.cs" />
+    <Compile Include="ValidationStrategies\ValidateThatInstructionsAreNotNullOrEmptyStrategy.cs" />
+    <Compile Include="ValidationStrategies\ValidateThatInstructionsHaveAValidNumberOfLinesStrategy.cs" />
+    <Compile Include="ValidationStrategies\ValidateThatTheLinesAboutMowerMovementsAreCorrectStrategy.cs" />
+    <Compile Include="ValidationStrategies\ValidateThatTheLinesAboutMowerPositionsAreCorrectStrategy.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
