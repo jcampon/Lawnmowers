@@ -11,12 +11,16 @@ namespace Lawnmowers.Services.Tests
     [TestFixture]
     class LawnmowingOperationsServiceTests
     {
+        private ILawnmowingInstructionsInputValidator _inputValidator;
+        private ILawnmowingInstructionsInputParser _inputParser;
         private ILawnmowingOperationsService _lawnmowingOperationsService;
 
         [SetUp]
         public void Setup()
         {
-            _lawnmowingOperationsService = new LawnmowingOperationsService();
+            _inputValidator = new LawnmowingInstructionsInputValidator();
+            _inputParser = new LawnmowingInstructionsInputParser();
+            _lawnmowingOperationsService = new LawnmowingOperationsService(_inputValidator, _inputParser);
         }
 
         [Test]

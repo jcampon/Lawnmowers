@@ -19,8 +19,8 @@ namespace Lawnmowers.Services
 
     public class LawnmowingOperationsService : ILawnmowingOperationsService
     {
-        private ILawnmowingInstructionsInputValidator _inputValidator = new LawnmowingInstructionsInputValidator();
-        private ILawnmowingInstructionsInputParser _inputParser = new LawnmowingInstructionsInputParser();
+        private ILawnmowingInstructionsInputValidator _inputValidator;
+        private ILawnmowingInstructionsInputParser _inputParser;
         private List<Lawnmower> _lawnmowers = new List<Lawnmower>();
 
         public List<Lawnmower> Lawnmowers
@@ -33,6 +33,11 @@ namespace Lawnmowers.Services
 
         public string ErrorMessageFromValidationFailure = string.Empty;
 
+        public LawnmowingOperationsService(ILawnmowingInstructionsInputValidator inputValidator, ILawnmowingInstructionsInputParser inputParser)
+        {
+            _inputValidator = inputValidator;
+            _inputParser = inputParser;
+        }
 
         public bool ValidateTheInput(string instructions)
         {
