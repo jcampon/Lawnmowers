@@ -63,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="LawnmowerTests.cs" />
+    <Compile Include="LawnmowingOperationsServiceTests.cs" />
     <Compile Include="LocationCoordinatesTests.cs" />
     <Compile Include="LawnDimensionsTests.cs" />
     <Compile Include="LawnmowingInstructionsInputParserTests.cs" />
