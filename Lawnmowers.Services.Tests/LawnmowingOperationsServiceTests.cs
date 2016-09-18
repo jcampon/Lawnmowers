@@ -33,11 +33,47 @@ namespace Lawnmowers.Services.Tests
         public void Test_that_the_service_can_validate_instructions_input_correctly(string instructions, bool expectedValidation)
         {
             // Act            
-            var areInstructionsInputValid = _lawnmowingOperationsService.ValidateInput(instructions);
+            var areInstructionsInputValid = _lawnmowingOperationsService.ValidateTheInput(instructions);
 
             // Assert
             Assert.That(areInstructionsInputValid, Is.EqualTo(expectedValidation));
         }
 
+        [Test]
+        public void Test_that_the_service_can_parse_instructions_input_correctly()
+        {
+            // Act            
+            _lawnmowingOperationsService.MowTheLawnUsingTheInput("5 6\n1 2 N\nLMLMLMLMM\n3 3 E\nMMRMMRMRRM");
+            var lawnmower1 = _lawnmowingOperationsService.Lawnmowers[0];
+            var lawnmower2 = _lawnmowingOperationsService.Lawnmowers[1];
+
+            // Assert
+            Assert.That(_lawnmowingOperationsService.Lawnmowers.Count, Is.EqualTo(2));
+
+            Assert.That(lawnmower1.Orientation, Is.EqualTo('N'));
+            Assert.That(lawnmower1.Instructions, Is.EqualTo("LMLMLMLMM"));
+            Assert.That(lawnmower1.LawnDimensionsReference.LengthOfAxisX, Is.EqualTo(5));
+            Assert.That(lawnmower1.LawnDimensionsReference.LengthOfAxisY, Is.EqualTo(6));
+            Assert.That(lawnmower1.Position.LocationOnAxisX, Is.EqualTo(1));            
+
+            Assert.That(lawnmower2.Orientation, Is.EqualTo('E'));
+            Assert.That(lawnmower2.Instructions, Is.EqualTo("MMRMMRMRRM"));
+            Assert.That(lawnmower2.LawnDimensionsReference.LengthOfAxisX, Is.EqualTo(5));
+            Assert.That(lawnmower2.LawnDimensionsReference.LengthOfAxisY, Is.EqualTo(6));
+        }
+
+        [Test]
+        public void Test_that_the_service_produce_the_correct_output_after_all_lawnmowers_finish()
+        {
+            // Act            
+            _lawnmowingOperationsService.MowTheLawnUsingTheInput("5 6\n1 2 N\nLMLMLMLMM\n3 3 E\nMMRMMRMRRM");
+
+            var outputResult = _lawnmowingOperationsService.GetOutputResultsAfterLawnmowing();
+
+            // Assert
+            Assert.That(outputResult, Is.EqualTo("1 3 N\r\n5 1 E\r\n"));
+        }
+
     }
+
 }

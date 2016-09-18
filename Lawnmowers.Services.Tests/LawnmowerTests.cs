@@ -32,7 +32,7 @@ namespace Lawnmowers.Services.Tests
             var finalOuput = _lawnmower.GetFinishedInstructionsOutput();
 
             // Assert
-            Assert.That(finalOuput, Is.EqualTo("1 3 N"));
+            Assert.That(finalOuput, Is.EqualTo("1 3 N\r\n"));
         }
 
     }

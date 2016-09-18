@@ -15,7 +15,7 @@ namespace Lawnmowers.Services
     }
 
     public class LawnmowingInstructionsInputParser : ILawnmowingInstructionsInputParser
-    {        
+    {
         public LawnDimensions GetLawnDimensionsFrom(string instructions)
         {
             var topRightCornerLocationCoordinates = GetLocationCoordinatesFrom(instructions);

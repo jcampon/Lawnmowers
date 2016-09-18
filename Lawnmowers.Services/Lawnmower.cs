@@ -38,7 +38,7 @@ namespace Lawnmowers.Services
 
         public string GetFinishedInstructionsOutput()
         {
-            return $"{Position.LocationOnAxisX} {Position.LocationOnAxisY} {Orientation}";
+            return $"{Position.LocationOnAxisX} {Position.LocationOnAxisY} {Orientation}\r\n";
         }
 
         #region Private Helper Methods
