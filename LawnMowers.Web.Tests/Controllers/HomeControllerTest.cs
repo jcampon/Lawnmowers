@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using LawnMowers.Web;
+using Lawnmowers.Services;
 using LawnMowers.Web.Controllers;
 using NUnit.Framework;
 
@@ -17,7 +18,10 @@ namespace LawnMowers.Web.Tests.Controllers
         [SetUp]
         public void Setup()
         {
-            _homeController = new HomeController();
+            var validator = new LawnmowingInstructionsInputValidator();
+            var parser = new LawnmowingInstructionsInputParser();
+            var service = new LawnmowingOperationsService(validator, parser);
+            _homeController = new HomeController(service);
         }
 
         [Test]

@@ -10,6 +10,8 @@ namespace Lawnmowers.Services
     {
         List<Lawnmower> Lawnmowers { get; }
 
+        string ErrorMessageFromValidationFailure { get; set; }
+
         bool ValidateTheInput(string instructions);
 
         void MowTheLawnUsingTheInput(string instructions);

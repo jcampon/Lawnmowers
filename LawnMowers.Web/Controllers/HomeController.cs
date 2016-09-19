@@ -3,32 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Lawnmowers.Services;
 
 namespace LawnMowers.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private ILawnmowingOperationsService _service;
+
+        public HomeController(ILawnmowingOperationsService service)
+        {
+            _service = service;
+        }
+
         public ActionResult Index()
         {
             return View();
         }
 
         public ViewResult MowTheLawn(string Instructions)
-        {
+        {            
 
-            var validator = new Lawnmowers.Services.LawnmowingInstructionsInputValidator();
-            var parser = new Lawnmowers.Services.LawnmowingInstructionsInputParser();
-            var service = new Lawnmowers.Services.LawnmowingOperationsService(validator, parser);
-
-            if (service.ValidateTheInput(Instructions))
+            if (_service.ValidateTheInput(Instructions))
             {
-                service.MowTheLawnUsingTheInput(Instructions);
+                _service.MowTheLawnUsingTheInput(Instructions);
 
-                ViewBag.Result = service.GetOutputResultsAfterLawnmowing();
+                ViewBag.Result = _service.GetOutputResultsAfterLawnmowing();
             }
             else
             {
-                ViewBag.Error = service.ErrorMessageFromValidationFailure;
+                ViewBag.Error = _service.ErrorMessageFromValidationFailure;
             }
 
             return View("Results");
