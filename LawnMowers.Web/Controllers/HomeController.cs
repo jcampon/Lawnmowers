@@ -13,18 +13,25 @@ namespace LawnMowers.Web.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ViewResult MowTheLawn(string Instructions)
         {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
+            var validator = new Lawnmowers.Services.LawnmowingInstructionsInputValidator();
+            var parser = new Lawnmowers.Services.LawnmowingInstructionsInputParser();
+            var service = new Lawnmowers.Services.LawnmowingOperationsService(validator, parser);
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            if (service.ValidateTheInput(Instructions))
+            {
+                service.MowTheLawnUsingTheInput(Instructions);
 
-            return View();
+                ViewBag.Result = service.GetOutputResultsAfterLawnmowing();
+            }
+            else
+            {
+                ViewBag.Error = service.ErrorMessageFromValidationFailure;
+            }
+
+            return View("Results");
         }
     }
 }

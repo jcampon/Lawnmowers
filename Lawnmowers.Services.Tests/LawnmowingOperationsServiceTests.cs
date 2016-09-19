@@ -13,7 +13,7 @@ namespace Lawnmowers.Services.Tests
     {
         private ILawnmowingInstructionsInputValidator _inputValidator;
         private ILawnmowingInstructionsInputParser _inputParser;
-        private ILawnmowingOperationsService _lawnmowingOperationsService;
+        private LawnmowingOperationsService _lawnmowingOperationsService;
 
         [SetUp]
         public void Setup()
@@ -76,6 +76,18 @@ namespace Lawnmowers.Services.Tests
 
             // Assert
             Assert.That(outputResult, Is.EqualTo("1 3 N\r\n5 1 E\r\n"));
+        }
+
+        [Test]
+        public void Test_that_the_service_provides_an_error_message_when_validation_fails()
+        {
+            // Act            
+            _lawnmowingOperationsService.MowTheLawnUsingTheInput("Bad instructions that should fail validation");
+
+            var outputResult = _lawnmowingOperationsService.ErrorMessageFromValidationFailure;
+
+            // Assert
+            Assert.That(outputResult, Is.EqualTo("Error! The input instructions provided are nor correct"));
         }
 
     }

@@ -31,7 +31,7 @@ namespace Lawnmowers.Services
             }
         }
 
-        public string ErrorMessageFromValidationFailure = string.Empty;
+        public string ErrorMessageFromValidationFailure { get; set; }
 
         public LawnmowingOperationsService(ILawnmowingInstructionsInputValidator inputValidator, ILawnmowingInstructionsInputParser inputParser)
         {
@@ -41,7 +41,12 @@ namespace Lawnmowers.Services
 
         public bool ValidateTheInput(string instructions)
         {
-            return _inputValidator.Validate(instructions);
+            var instructionsAreValid = _inputValidator.Validate(instructions);
+
+            if (!instructionsAreValid)
+                SetUpErrorMessageFromValidationFailure();
+
+            return instructionsAreValid;
         }
 
         public void MowTheLawnUsingTheInput(string instructions)
@@ -52,7 +57,7 @@ namespace Lawnmowers.Services
                 OperateAllLawnmowersUsingTheInput(instructions);
             }
             else
-                ErrorMessageFromValidationFailure = "Error! The input instructions provided are nor correct";
+                SetUpErrorMessageFromValidationFailure();
         }       
 
         public string GetOutputResultsAfterLawnmowing()
@@ -81,6 +86,11 @@ namespace Lawnmowers.Services
             {
                 lanwmower.ProcessAllInstructions();
             }            
+        }
+
+        private void SetUpErrorMessageFromValidationFailure()
+        {
+            ErrorMessageFromValidationFailure = "Error! The input instructions provided are nor correct";
         }
 
         #endregion

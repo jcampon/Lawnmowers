@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<div class="jumbotron">
+    <h1>Lawn Mowers </h1>
+    <p class="lead">Service control to operate the remote lawn mowers and get them mowing.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h4>Results of the lawnmowing operation:</h4>
+
+        <p>
+            <textarea rows="4" cols="50">
+                @{
+                    if (string.IsNullOrWhiteSpace(ViewBag.Error))
+                    {
+                        @ViewBag.Result
+                    }
+                    else
+                    {
+                        @ViewBag.Error
+                    }
+                }
+            </textarea>
+        </p>
+        <p>
+            @Html.ActionLink("Fancy more lawn mowing again?", "Index", "Home")
+        </p>
+    </div>
+</div>

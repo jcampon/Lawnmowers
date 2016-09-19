@@ -3,52 +3,61 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LawnMowers.Web;
 using LawnMowers.Web.Controllers;
+using NUnit.Framework;
 
 namespace LawnMowers.Web.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
-        public void Index()
+        private HomeController _homeController;
+
+        [SetUp]
+        public void Setup()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            _homeController = new HomeController();
         }
 
-        [TestMethod]
-        public void About()
+        [Test]
+        public void Test_that_the_index_action_returns_a_view_result()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
             // Act
-            ViewResult result = controller.About() as ViewResult;
+            ViewResult result = _homeController.Index() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.That(result, Is.Not.Null);
         }
 
-        [TestMethod]
-        public void Contact()
+        [Test]
+        public void Test_that_the_mowthelawn_action_returns_a_view_result()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            ViewResult result = _homeController.MowTheLawn("some input") as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        public void Test_the_result_message_on_the_viewbag_when_mowthelawn_action_received_correct_instructions()
+        {
+            // Act
+            ViewResult result = _homeController.MowTheLawn("5 6\n1 2 N\nLMLMLMLMM") as ViewResult;
+
+            // Assert
+            Assert.That(_homeController.ViewBag.Result, Is.EqualTo("1 3 N\r\n"));
+        }
+
+        [Test]
+        public void Test_the_error_message_on_the_viewbag_when_mowthelawn_action_received_wrong_instructions()
+        {
+            // Act
+            ViewResult result = _homeController.MowTheLawn("some wrong input") as ViewResult;
+
+            // Assert
+            Assert.That(_homeController.ViewBag.Error, Is.EqualTo("Error! The input instructions provided are nor correct"));
         }
     }
 }
