@@ -13,7 +13,7 @@
         {
             <fieldset>
                 <p>
-                    @Html.EditorFor(model => model.Instructions)
+                    @Html.EditorFor(model => model.Instructions, Model.Instructions)
                     <br />
                     @Html.ValidationSummary()
                 </p>

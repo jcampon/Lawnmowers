@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Lawnmowers.Services;
+using Lawnmowers.Web.Models;
 
 namespace LawnMowers.Web.Controllers
 {
@@ -18,7 +19,9 @@ namespace LawnMowers.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var instructionsInputModel = new InstructionsInputModel();
+
+            return View(instructionsInputModel);
         }
 
         public ViewResult MowTheLawn(string Instructions)
